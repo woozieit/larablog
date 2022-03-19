@@ -3,7 +3,17 @@
 @section('content')
 
     <div class="mt-5 card">
+        <div class="card-header">
+            <a href="{{ route('categories.create') }}" class="btn btn-sm btn-primary my-3">Nuevo Registro</a>
+        </div>
         <div class="card-body">
+
+            @if ( Session::has('success') )
+                <div class="alert alert-success my-5" role="alert">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+
             <table class="table">
                 <thead>
                     <tr>
@@ -20,7 +30,7 @@
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-primary mr-2">Editar</a>
+                                <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-primary mr-2">Editar</a>
 
                                 <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:  inline-block">
                                     @csrf
